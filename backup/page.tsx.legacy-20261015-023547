@@ -1,0 +1,422 @@
+'use client'
+
+import React, { useState } from 'react'
+
+export default function Home() {
+  const downloadUrl = 'https://expo.dev/artifacts/eas/QAbW25I-o8yiXEOoAXELSHP7ccik8GIUouLUEQTgz_w.apk'
+  const [activeFaq, setActiveFaq] = useState<number | null>(null)
+
+  const faqs = [
+    {
+      question: 'Is RepForge free to use?',
+      answer: 'Yes! RepForge is completely free to download and use. All core features are available at no cost.',
+    },
+    {
+      question: 'Does it work offline?',
+      answer: 'Absolutely. You can track workouts without an internet connection. Your data syncs automatically when you reconnect.',
+    },
+    {
+      question: 'Is my data secure?',
+      answer: 'Yes, your data is encrypted and stored securely using Supabase. We prioritize your privacy and data security.',
+    },
+    {
+      question: 'Can I export my workout data?',
+      answer: 'Yes, you can export your workout history and plans for backup or sharing purposes.',
+    },
+    {
+      question: 'Will there be an iOS version?',
+      answer: 'iOS support is coming soon! We\'re working hard to bring RepForge to iPhone users.',
+    },
+  ]
+
+  const articles = [
+    {
+      title: 'Best 3-Day Workout Split: The Complete Guide',
+      category: 'Guides',
+    },
+    {
+      title: '4 Day Workout Split – The Complete Guide',
+      category: 'Guides',
+    },
+    {
+      title: '5 Day Workout Split: Upper/Lower, PPL & More',
+      category: 'Guides',
+    },
+    {
+      title: 'Your First Day at the Gym: Step-By-Step Guide',
+      category: 'Articles',
+    },
+    {
+      title: '11 Gym Mistakes Beginners Make',
+      category: 'Articles',
+    },
+    {
+      title: 'Strength Training Over 40: A 10-Point Checklist',
+      category: 'Articles',
+    },
+  ]
+
+  return (
+    <div className="min-h-screen bg-white">
+      {/* Navigation */}
+      <nav className="fixed top-0 left-0 right-0 bg-white z-50 border-b border-gray-100">
+        <div className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+          <h1 className="text-2xl font-bold text-gray-900">RepForge</h1>
+          <div className="hidden md:flex space-x-8">
+            <a href="#features" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">Features</a>
+            <a href="#guides" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">Guides</a>
+            <a href="#faq" className="text-gray-600 hover:text-gray-900 transition-colors font-medium">FAQ</a>
+          </div>
+          <a
+            href={downloadUrl}
+            download
+            className="px-6 py-2 bg-gray-900 text-white rounded-full font-medium hover:bg-gray-800 transition-colors"
+          >
+            Download
+          </a>
+        </div>
+      </nav>
+
+      {/* Hero Section */}
+      <section className="pt-24 pb-8 px-6 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center">
+            <h1 className="text-5xl md:text-7xl font-bold mb-4 text-gray-900">
+              Log Workouts
+            </h1>
+            <h1 className="text-5xl md:text-7xl font-bold mb-4 text-gray-900">
+              Get Stronger
+            </h1>
+            <h1 className="text-5xl md:text-7xl font-bold mb-8 text-gray-900">
+              Stay Motivated
+            </h1>
+            <p className="text-xl text-gray-600 mb-6 max-w-2xl mx-auto">
+              RepForge is a free workout tracker for Android. Build routines and track progress.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center mb-8">
+              <a
+                href={downloadUrl}
+                download
+                className="inline-flex items-center justify-center px-8 py-4 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors"
+              >
+                <svg className="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M17.523 15.3414C17.523 15.3414 17.562 15.3806 17.562 15.3806C17.6103 15.4291 17.6393 15.4935 17.6393 15.5674C17.6393 15.6413 17.6103 15.7057 17.562 15.7542L15.6566 17.6596C15.6081 17.7081 15.5437 17.7371 15.4698 17.7371C15.3959 17.7371 15.3315 17.7081 15.283 17.6596L13.3776 15.7542C13.3291 15.7057 13.3001 15.4935 13.3001 15.4935C13.3001 15.4196 13.3291 15.3552 13.3776 15.3067L13.4162 15.2675C13.4742 15.2095 13.5779 15.2095 13.6359 15.2675L15.4698 17.1014L17.3037 15.2675C17.3617 15.2095 17.4654 15.2095 17.5234 15.2675H17.523ZM12.0172 10.4507V16.5333H13.0208V11.4543H15.4698L17.9188 16.5333H18.9224L16.4734 11.4543H18.9224V10.4507H12.0172ZM5.07764 16.5333H6.08127V13.5821H8.53028C9.93346 13.5821 11.0376 12.478 11.0376 11.0748C11.0376 9.67159 9.93346 8.56746 8.53028 8.56746H5.07764V16.5333ZM6.08127 12.5785V9.57113H8.53028C9.38107 9.57113 10.0339 10.224 10.0339 11.0748C10.0339 11.9256 9.38107 12.5785 8.53028 12.5785H6.08127Z"/>
+                </svg>
+                Download for Android
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* App Screenshot Section */}
+      <section className="py-8 px-6 bg-gray-50">
+        <div className="max-w-5xl mx-auto">
+          <div className="bg-gradient-to-br from-gray-100 to-gray-200 rounded-3xl p-8 md:p-12 flex items-center justify-center">
+            <img 
+              src="/home.png" 
+              alt="RepForge Home Screen" 
+              className="max-w-sm md:max-w-md rounded-3xl shadow-2xl"
+            />
+          </div>
+        </div>
+      </section>
+
+      {/* Log Workouts Section */}
+      <section id="features" className="py-12 px-6 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <div>
+              <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
+                Log workouts
+              </h2>
+              <p className="text-lg text-gray-600 mb-6">
+                A workout tracking app that just works. Everything you need to log your workouts and smash your goals.
+              </p>
+              <ul className="space-y-3">
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-3">✓</span>
+                  <span className="text-gray-700">Intuitive Workout Logging</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-3">✓</span>
+                  <span className="text-gray-700">Advanced Routine Planner</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-3">✓</span>
+                  <span className="text-gray-700">Mark Warmup, Drop, and Failure Sets</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-3">✓</span>
+                  <span className="text-gray-700">Automatic Rest Timers</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-3">✓</span>
+                  <span className="text-gray-700">Add Exercise Notes</span>
+                </li>
+              </ul>
+            </div>
+            <div className="bg-gray-100 rounded-2xl p-6 flex items-center justify-center">
+              <img 
+                src="/routines.png" 
+                alt="RepForge Routines Screen" 
+                className="max-w-xs md:max-w-sm rounded-2xl shadow-lg"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Measure Progress Section */}
+      <section className="py-12 px-6 bg-gray-50">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <div className="bg-gray-200 rounded-2xl p-6 flex items-center justify-center order-2 lg:order-1">
+              <img 
+                src="/history.png" 
+                alt="RepForge History Screen" 
+                className="max-w-xs md:max-w-sm rounded-2xl shadow-lg"
+              />
+            </div>
+            <div className="order-1 lg:order-2">
+              <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
+                Measure progress
+              </h2>
+              <p className="text-lg text-gray-600 mb-6">
+                Staying motivated is easier when you can see how far you've come.
+              </p>
+              <ul className="space-y-3">
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-3">✓</span>
+                  <span className="text-gray-700">Advanced Exercise Charts</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-3">✓</span>
+                  <span className="text-gray-700">Personal Records</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-3">✓</span>
+                  <span className="text-gray-700">Calculate One Rep Max</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-3">✓</span>
+                  <span className="text-gray-700">Create Your Own Custom Exercises</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-3">✓</span>
+                  <span className="text-gray-700">Complete Exercise History</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Exercise Library Section */}
+      <section className="py-12 px-6 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
+            <div>
+              <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
+                Exercise library
+              </h2>
+              <p className="text-lg text-gray-600 mb-6">
+                Access a comprehensive library of exercises with detailed instructions and muscle group targeting.
+              </p>
+              <ul className="space-y-3">
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-3">✓</span>
+                  <span className="text-gray-700">Detailed Exercise Instructions</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-3">✓</span>
+                  <span className="text-gray-700">Muscle Group Targeting</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-3">✓</span>
+                  <span className="text-gray-700">Difficulty Levels</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-3">✓</span>
+                  <span className="text-gray-700">Equipment Requirements</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-green-500 mr-3">✓</span>
+                  <span className="text-gray-700">Safety Guidance</span>
+                </li>
+              </ul>
+            </div>
+            <div className="bg-gray-100 rounded-2xl p-6 flex items-center justify-center">
+              <img 
+                src="/library.png" 
+                alt="RepForge Library Screen" 
+                className="max-w-xs md:max-w-sm rounded-2xl shadow-lg"
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Platform Support Section */}
+      <section className="py-12 px-6 bg-gray-50">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-8">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
+              Available on multiple platforms
+            </h2>
+            <p className="text-lg text-gray-600">Track your workouts anywhere, anytime</p>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div className="bg-white rounded-2xl p-6 text-center shadow-sm border border-gray-100">
+              <div className="text-5xl mb-4">📱</div>
+              <h3 className="text-xl font-bold mb-2 text-gray-900">Android</h3>
+              <p className="text-gray-600 mb-4">Download now</p>
+              <a
+                href={downloadUrl}
+                download
+                className="inline-block px-6 py-3 bg-gray-900 text-white rounded-lg font-medium hover:bg-gray-800 transition-colors"
+              >
+                Download
+              </a>
+            </div>
+            <div className="bg-white rounded-2xl p-6 text-center shadow-sm border border-gray-100">
+              <div className="text-5xl mb-4">🍎</div>
+              <h3 className="text-xl font-bold mb-2 text-gray-900">iOS</h3>
+              <span className="inline-block px-4 py-2 bg-yellow-100 text-yellow-800 rounded-full text-sm font-medium">
+                Coming Soon
+              </span>
+            </div>
+            <div className="bg-white rounded-2xl p-6 text-center shadow-sm border border-gray-100">
+              <div className="text-5xl mb-4">💻</div>
+              <h3 className="text-xl font-bold mb-2 text-gray-900">Web</h3>
+              <span className="inline-block px-4 py-2 bg-yellow-100 text-yellow-800 rounded-full text-sm font-medium">
+                Coming Soon
+              </span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Guides Section */}
+      <section id="guides" className="py-12 px-6 bg-white">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-8">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
+              Our Guides
+            </h2>
+          </div>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {articles.map((article, index) => (
+              <div
+                key={index}
+                className="bg-gray-50 rounded-xl p-6 hover:bg-gray-100 transition-colors cursor-pointer"
+              >
+                <span className="text-xs font-medium text-gray-500 uppercase">{article.category}</span>
+                <h3 className="mt-2 font-semibold text-gray-900">{article.title}</h3>
+                <p className="mt-2 text-sm text-gray-600">Read More →</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section */}
+      <section id="faq" className="py-12 px-6 bg-gray-50">
+        <div className="max-w-3xl mx-auto">
+          <div className="text-center mb-8">
+            <h2 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
+              Need help?
+            </h2>
+            <p className="text-lg text-gray-600">Check out our FAQ</p>
+          </div>
+          
+          <div className="space-y-4">
+            {faqs.map((faq, index) => (
+              <div
+                key={index}
+                className="bg-white rounded-xl border border-gray-200 overflow-hidden"
+              >
+                <button
+                  onClick={() => setActiveFaq(activeFaq === index ? null : index)}
+                  className="w-full px-6 py-4 text-left flex justify-between items-center hover:bg-gray-50 transition-colors"
+                >
+                  <span className="font-semibold text-gray-900">{faq.question}</span>
+                  <span className="text-2xl text-gray-500">
+                    {activeFaq === index ? '−' : '+'}
+                  </span>
+                </button>
+                {activeFaq === index && (
+                  <div className="px-6 pb-4 text-gray-600">
+                    {faq.answer}
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Download CTA Section */}
+      <section className="py-12 px-6 bg-gray-900">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-white">
+            Ready to get started?
+          </h2>
+          <p className="text-lg text-gray-300 mb-8 max-w-2xl mx-auto">
+            Log your workouts and track your progress on RepForge.
+          </p>
+          <a
+            href={downloadUrl}
+            download
+            className="inline-flex items-center justify-center px-10 py-5 bg-white text-gray-900 rounded-lg font-semibold hover:bg-gray-100 transition-colors"
+          >
+            <svg className="w-6 h-6 mr-2" fill="currentColor" viewBox="0 0 24 24">
+              <path d="M17.523 15.3414C17.523 15.3414 17.562 15.3806 17.562 15.3806C17.6103 15.4291 17.6393 15.4935 17.6393 15.5674C17.6393 15.6413 17.6103 15.7057 17.562 15.7542L15.6566 17.6596C15.6081 17.7081 15.5437 17.7371 15.4698 17.7371C15.3959 17.7371 15.3315 17.7081 15.283 17.6596L13.3776 15.7542C13.3291 15.7057 13.3001 15.4935 13.3001 15.4935C13.3001 15.4196 13.3291 15.3552 13.3776 15.3067L13.4162 15.2675C13.4742 15.2095 13.5779 15.2095 13.6359 15.2675L15.4698 17.1014L17.3037 15.2675C17.3617 15.2095 17.4654 15.2095 17.5234 15.2675H17.523ZM12.0172 10.4507V16.5333H13.0208V11.4543H15.4698L17.9188 16.5333H18.9224L16.4734 11.4543H18.9224V10.4507H12.0172ZM5.07764 16.5333H6.08127V13.5821H8.53028C9.93346 13.5821 11.0376 12.478 11.0376 11.0748C11.0376 9.67159 9.93346 8.56746 8.53028 8.56746H5.07764V16.5333ZM6.08127 12.5785V9.57113H8.53028C9.38107 9.57113 10.0339 10.224 10.0339 11.0748C10.0339 11.9256 9.38107 12.5785 8.53028 12.5785H6.08127Z"/>
+            </svg>
+            Download RepForge
+          </a>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="px-6 py-8 bg-white border-t border-gray-100">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-6">
+            <div>
+              <h3 className="text-xl font-bold text-gray-900 mb-4">RepForge</h3>
+              <p className="text-gray-600 text-sm">Track your workouts, store your progress, and plan better sessions.</p>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4 text-gray-900">Product</h4>
+              <ul className="space-y-2 text-sm text-gray-600">
+                <li><a href="#features" className="hover:text-gray-900 transition-colors">Features</a></li>
+                <li><a href={downloadUrl} className="hover:text-gray-900 transition-colors">Download</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4 text-gray-900">Support</h4>
+              <ul className="space-y-2 text-sm text-gray-600">
+                <li><a href="#faq" className="hover:text-gray-900 transition-colors">FAQ</a></li>
+                <li><a href="#" className="hover:text-gray-900 transition-colors">Contact Us</a></li>
+                <li><a href="#" className="hover:text-gray-900 transition-colors">Privacy Policy</a></li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-4 text-gray-900">Connect</h4>
+              <ul className="space-y-2 text-sm text-gray-600">
+                <li><a href="#" className="hover:text-gray-900 transition-colors">Twitter</a></li>
+                <li><a href="#" className="hover:text-gray-900 transition-colors">Instagram</a></li>
+                <li><a href="#" className="hover:text-gray-900 transition-colors">GitHub</a></li>
+              </ul>
+            </div>
+          </div>
+          <div className="border-t border-gray-100 pt-6 text-center text-sm text-gray-500">
+            <p>&copy; 2024 RepForge. All rights reserved.</p>
+          </div>
+        </div>
+      </footer>
+    </div>
+  )
+}

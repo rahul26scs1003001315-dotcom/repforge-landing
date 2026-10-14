@@ -1,0 +1,115 @@
+@import "tailwindcss";
+
+/* ---------------------------------------------------------------------------
+ * Brand theme.
+ * This project has Tailwind 4 installed, which is configured in CSS (via
+ * @theme) rather than tailwind.config.js. The old file used Tailwind 3
+ * directives (`@tailwind base;`), so NO utilities were ever generated and the
+ * page rendered unstyled. Anything below becomes a real utility class:
+ *   --color-brand -> bg-brand / text-brand / border-brand
+ * ------------------------------------------------------------------------- */
+@theme {
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue",
+    Arial, sans-serif;
+
+  /* Energetic orange - primary calls to action */
+  --color-brand: #ff5c39;
+  --color-brand-dark: #e0431f;
+  --color-brand-soft: #fff1ec;
+
+  /* Vibrant blue - secondary accent, links, info */
+  --color-sky: #2f6bff;
+  --color-sky-soft: #eef3ff;
+
+  /* Neon-ish green - success, progress, "done" states */
+  --color-mint: #00c48c;
+  --color-mint-soft: #e7faf3;
+
+  /* Violet - tertiary accent for charts */
+  --color-grape: #7c5cff;
+  --color-grape-soft: #f2efff;
+
+  /* Neutrals on white */
+  --color-ink: #101828;
+  --color-slate-soft: #475467;
+  --color-muted: #667085;
+  --color-hairline: #eaecf0;
+  --color-wash: #f9fafb;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #ffffff;
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Anchor targets clear the sticky header when jumped to. */
+[id] {
+  scroll-margin-top: 88px;
+}
+
+/* --- Motion ------------------------------------------------------------- */
+@keyframes rf-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes rf-pulse-ring {
+  0% {
+    transform: scale(0.9);
+    opacity: 0.7;
+  }
+  70% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1.6);
+    opacity: 0;
+  }
+}
+
+@keyframes rf-draw {
+  from {
+    stroke-dashoffset: 1200;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-rise {
+  animation: rf-rise 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+.animate-pulse-ring {
+  animation: rf-pulse-ring 2.4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.chart-line {
+  stroke-dasharray: 1200;
+  animation: rf-draw 1.6s ease-out forwards;
+}
+
+/* Respect users who ask for less motion. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-rise,
+  .animate-pulse-ring,
+  .chart-line {
+    animation: none;
+  }
+}
