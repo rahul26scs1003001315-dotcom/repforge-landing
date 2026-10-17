@@ -309,7 +309,7 @@ function Hero() {
           </div>
 
           <p className="mt-3 text-xs text-muted">
-            Android 7.0+ &middot; 75 MB APK &middot; No account required to start
+            Android 7.0+ &middot; 76 MB APK &middot; No account required to start
           </p>
 
           <StoreBadges className="mt-8" />
