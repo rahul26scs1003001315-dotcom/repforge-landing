@@ -47,6 +47,8 @@ type SharedExercise = {
 
 type SharedRoutine = {
   name: string
+  /** Optional byline: links made before the app sent one have no author. */
+  author?: string
   exercises: SharedExercise[]
 }
 
@@ -140,7 +142,11 @@ const parsePayload = (value: unknown): SharedRoutine | null => {
   }
 
   if (!exercises.length) return null
-  return { name: value.n, exercises }
+  return {
+    name: value.n,
+    ...(typeof value.a === 'string' && value.a.trim() ? { author: value.a.trim() } : {}),
+    exercises,
+  }
 }
 
 const decodePayload = (payload: string): SharedRoutine | null => {
@@ -252,12 +258,24 @@ export default function SharedRoutinePage() {
 
   return (
     <Shell>
-      <p className="text-xs font-bold tracking-[0.18em] text-brand uppercase">Shared routine</p>
-      <h1 className="mt-2 text-4xl font-black tracking-tight text-ink">{routine.name}</h1>
-      <p className="mt-2 text-muted">
-        {routine.exercises.length} exercise{routine.exercises.length === 1 ? '' : 's'} ·{' '}
-        {totalSets} total sets
+      {/* The same three facts the shared message opens with — name, byline, and
+          how much work it is — so tapping the link does not feel like a
+          different routine from the one in the chat. */}
+      <p className="text-xs font-bold tracking-[0.18em] text-brand uppercase">
+        {routine.author ? 'Routine by ' + routine.author : 'Shared routine'}
       </p>
+      <h1 className="mt-2 text-4xl font-black tracking-tight text-ink">{routine.name}</h1>
+      <div className="mt-4 flex flex-wrap gap-2">
+        <span className="rounded-full border border-hairline px-4 py-1.5 text-sm font-bold text-ink">
+          Routine
+        </span>
+        <span className="rounded-full border border-hairline px-4 py-1.5 text-sm font-bold text-ink">
+          {routine.exercises.length} exercise{routine.exercises.length === 1 ? '' : 's'}
+        </span>
+        <span className="rounded-full border border-hairline px-4 py-1.5 text-sm font-bold text-ink">
+          {totalSets} sets
+        </span>
+      </div>
 
       <ol className="mt-8 flex list-none flex-col gap-3 p-0">
         {routine.exercises.map((exercise, index) => (

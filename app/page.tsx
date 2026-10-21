@@ -1,6 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
+import Link from 'next/link'
 
 /* ===========================================================================
  * CONFIG — paste your store links here.
@@ -1199,15 +1200,18 @@ function Footer() {
             &copy; {new Date().getFullYear()} RepForge. All rights reserved.
           </p>
           <div className="flex gap-6">
-            {['Privacy', 'Terms', 'Cookies'].map((l) => (
-              <a
-                key={l}
-                href="#top"
-                className="text-xs text-muted transition-colors duration-200 hover:text-brand"
-              >
-                {l}
-              </a>
-            ))}
+            <Link
+              href="/privacy"
+              className="text-xs text-muted transition-colors duration-200 hover:text-brand"
+            >
+              Privacy
+            </Link>
+            <Link
+              href="/delete-account"
+              className="text-xs text-muted transition-colors duration-200 hover:text-brand"
+            >
+              Delete account
+            </Link>
           </div>
         </div>
       </div>
