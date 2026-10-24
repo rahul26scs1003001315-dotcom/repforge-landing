@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     'What RepForge stores, where it is stored, and how to delete it. No ads, no trackers, no third-party analytics.',
 }
 
-const EFFECTIVE_DATE = '19 October 2026'
+const EFFECTIVE_DATE = '24 October 2026'
 const CONTACT_EMAIL = 'www.repforge@gmail.com'
 
 export default function PrivacyPage() {
@@ -28,7 +28,8 @@ export default function PrivacyPage() {
       <p className="mt-8 text-base leading-relaxed text-slate-soft">
         RepForge is a strength-training log for Android. This page describes every piece of data the
         app handles. There is no advertising SDK, no third-party analytics and no crash-reporting SDK
-        in the build.
+        in the build. Voice logging is optional, and the microphone is used only while you are
+        recording a set with it.
       </p>
 
       <Section title="Who is responsible">
@@ -85,11 +86,28 @@ export default function PrivacyPage() {
         </p>
       </Section>
 
+      <Section title="Voice logging">
+        <p>
+          Voice logging is optional and does nothing until you open the voice sheet. While you
+          record, the microphone is open. When you stop, the clip is sent to the RepForge
+          transcription service, which forwards it to Google Speech-to-Text and returns the
+          transcript.
+        </p>
+        <p>
+          The audio is held in memory for that request and is <strong>not stored</strong>: neither
+          RepForge nor the service writes the clip to disk, a database or a log. The transcript is
+          shown back to you in the sheet and is not saved unless you log the set yourself — at which
+          point only the numbers you confirm are stored with the workout. If you never open the
+          voice sheet, no audio is recorded.
+        </p>
+      </Section>
+
       <Section title="What is never collected">
         <p>
-          Location, contacts, camera, microphone, photos, installed-app lists, advertising
-          identifiers, and usage analytics. RepForge does not use Google Analytics, Firebase
-          Analytics, Crashlytics or any comparable service.
+          Location, contacts, camera, photos, installed-app lists, advertising identifiers, and
+          usage analytics. The microphone is used for voice logging only, as described above, and
+          never runs in the background. RepForge does not use Google Analytics, Firebase Analytics,
+          Crashlytics or any comparable service.
         </p>
       </Section>
 
@@ -99,6 +117,7 @@ export default function PrivacyPage() {
           <li>To save your routines, workouts and goals and show them back to you.</li>
           <li>To sync changes between your devices and keep the app usable offline.</li>
           <li>To let you restore your own data from a backup you exported.</li>
+          <li>To turn a spoken set into a transcribed one, when you use voice logging.</li>
         </ul>
         <p>
           The data is not used for advertising, profiling or automated decision-making, and it is
@@ -108,10 +127,11 @@ export default function PrivacyPage() {
 
       <Section title="Who processes it">
         <p>
-          Account and training data are hosted in the project&apos;s Supabase database, and app
-          updates are delivered by Expo&apos;s EAS Update service; both act as data processors. Data
-          is not sold, rented or shared with advertisers. Row-level security restricts every row to
-          the account that created it.
+          Account and training data are hosted in the project&apos;s Supabase database, app updates
+          are delivered by Expo&apos;s EAS Update service, and voice clips are transcribed by
+          Google Speech-to-Text; all three act as data processors on RepForge&apos;s instructions.
+          Data is not sold, rented or shared with advertisers. Row-level security restricts every
+          row to the account that created it.
         </p>
       </Section>
 
