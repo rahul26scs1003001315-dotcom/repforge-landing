@@ -1,0 +1,12 @@
+# Apple refuses an apple-app-site-association that is not served as JSON, and
+# Android is only slightly more forgiving. Neither file has an extension, so a
+# static host guesses and sends application/octet-stream unless told otherwise.
+# Netlify reads this file; GitHub Pages ignores it (and there the CDN's
+# application/octet-stream is accepted by iOS in practice, but not guaranteed).
+/.well-known/apple-app-site-association
+  Content-Type: application/json
+  Cache-Control: public, max-age=300
+
+/.well-known/assetlinks.json
+  Content-Type: application/json
+  Cache-Control: public, max-age=300

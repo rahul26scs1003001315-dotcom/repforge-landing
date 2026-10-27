@@ -1,0 +1,14 @@
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.rahul_00.repforge",
+      "sha256_cert_fingerprints": [
+        "1A:86:A9:FA:DD:07:90:FD:DB:D3:46:29:5D:17:4D:6C:0B:D0:69:C5:DA:71:EE:D3:0C:59:0B:66:5A:74:65:4F"
+      ]
+    }
+  }
+]

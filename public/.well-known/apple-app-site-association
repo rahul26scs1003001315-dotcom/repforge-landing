@@ -1,0 +1,25 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": [
+          "L97UZALMT8.com.rahul00.repforge"
+        ],
+        "components": [
+          {
+            "/": "/verify",
+            "comment": "Confirms a new account from the sign-up email"
+          },
+          {
+            "/": "/reset",
+            "comment": "Opens the password-reset screen from the reset email"
+          },
+          {
+            "/": "/r",
+            "comment": "Imports a shared routine"
+          }
+        ]
+      }
+    ]
+  }
+}
