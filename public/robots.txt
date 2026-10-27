@@ -1,0 +1,15 @@
+# https://repforge.website
+#
+# /verify and /reset exist only to hand a mail link to the app, and /r renders
+# whatever payload is in its query string. Indexed, they are empty shells that
+# compete with the landing page, so crawlers are asked to skip them. Apple and
+# Google fetch /.well-known/* themselves and ignore this file, so universal
+# links are unaffected by anything below.
+
+User-agent: *
+Allow: /
+Disallow: /verify
+Disallow: /reset
+Disallow: /r
+
+Sitemap: https://repforge.website/sitemap.xml
