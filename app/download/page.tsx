@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import DownloadLink from '../../components/DownloadLink'
 
 export const metadata: Metadata = {
   title: 'Download RepForge — Android APK, AppGallery and Amazon Appstore',
@@ -63,7 +64,7 @@ export default function DownloadPage() {
             </span>
           </div>
 
-          <a
+          <DownloadLink
             href={APK_URL}
             className="mt-5 inline-flex w-full items-center justify-center gap-2.5 rounded-2xl bg-gradient-to-r from-rose-500 to-rose-600 px-7 py-4 text-base font-bold text-white shadow-[0_16px_40px_-12px_rgba(244,63,94,0.8)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_22px_50px_-12px_rgba(244,63,94,0.9)] active:scale-[0.98] sm:w-auto"
           >
@@ -71,7 +72,7 @@ export default function DownloadPage() {
               <path d="M12 3v10.6l3.3-3.3 1.4 1.4L12 16.4l-4.7-4.7 1.4-1.4 3.3 3.3V3h2zM5 19h14v2H5v-2z" />
             </svg>
             Download the APK
-          </a>
+          </DownloadLink>
 
           <p className="mt-4 text-sm leading-relaxed text-slate-400">
             Requires Android 7.0 or newer. The download is a plain {SIZE_MB} file served from the

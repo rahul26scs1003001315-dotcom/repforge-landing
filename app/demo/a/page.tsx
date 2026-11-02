@@ -6,7 +6,10 @@ import { Mesh } from '../_components/mesh'
 import { Reveal } from '../_components/reveal'
 
 const APK_DOWNLOAD_URL =
-  'https://github.com/rahul26scs1003001315-dotcom/repforge-releases/releases/latest/download/repforge.apk'
+  // The homepage sends every download to our own page rather than straight to
+  // GitHub: that page carries the checksum, the install steps and the store
+  // links, and it is where a click becomes a counted download.
+  '/download'
 
 /* -------------------------------------------------------------------------- */
 /* Muscle map data                                                            */
