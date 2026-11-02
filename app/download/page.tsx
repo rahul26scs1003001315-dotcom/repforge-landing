@@ -27,7 +27,7 @@ const STORES = [
   {
     name: 'Huawei AppGallery',
     href: 'https://appgallery.huawei.com/search/RepForge',
-    note: 'Listed as RepForge. The store copy updates when Huawei finishes reviewing 1.0.15 — until then it may serve the previous build.',
+    note: 'Listed as RepForge. A store copy is always behind the APK above while a release is in review — the direct download is the current build.',
   },
   {
     name: 'Amazon Appstore',
