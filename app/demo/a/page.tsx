@@ -414,6 +414,16 @@ function Hero() {
             </a>
           </div>
 
+          <p className="mt-4 text-sm text-slate-400">
+            <a
+              href="/download"
+              className="font-semibold text-rose-400 transition-colors hover:text-rose-300"
+            >
+              All download options
+            </a>{' '}
+            — direct APK, AppGallery and the Amazon Appstore.
+          </p>
+
           <dl className="mt-10 grid max-w-md grid-cols-3 gap-3">
             {[
               { k: '160', v: 'Exercises' },
