@@ -7,7 +7,7 @@ export const metadata: Metadata = {
     'What RepForge stores, where it is stored, and how to delete it. No ads, no trackers, no third-party analytics.',
 }
 
-const EFFECTIVE_DATE = '24 October 2026'
+const EFFECTIVE_DATE = '2 November 2026'
 const CONTACT_EMAIL = 'www.repforge@gmail.com'
 
 export default function PrivacyPage() {
@@ -34,8 +34,13 @@ export default function PrivacyPage() {
 
       <Section title="Who is responsible">
         <p>
-          RepForge is developed and operated by an independent developer. For any privacy question
-          or request, email{' '}
+          RepForge is developed and published by rahul mandal, an individual developer, whose
+          AppGallery developer account is rahul mandal (developer ID hid46314285). The{' '}
+          <Link className="font-semibold text-brand" href="/privacy-zh" lang="zh-Hans">
+            Chinese version of this policy
+          </Link>{' '}
+          covers the same ground for readers in the Chinese mainland. For any privacy question or
+          request, email{' '}
           <a className="font-semibold text-brand" href={`mailto:${CONTACT_EMAIL}`}>
             {CONTACT_EMAIL}
           </a>
@@ -160,6 +165,29 @@ export default function PrivacyPage() {
           </a>{' '}
           from the address on the account. Deletion requests are completed within 30 days. Residual
           copies in encrypted backups are purged within the same period.
+        </p>
+      </Section>
+
+      <Section title="Consent and withdrawing it">
+        <p>
+          Before the app loads your account it shows this policy with an unticked box. Nothing is
+          collected and no account data is sent until you tick the box and choose{' '}
+          <strong>Agree and continue</strong>. Choosing not to agree — 不同意并退出 — closes the
+          app: no account is created, no request is made, and nothing is collected.
+        </p>
+        <p>
+          You can withdraw consent at any time from{' '}
+          <strong>Profile → Privacy and data → Withdraw privacy consent</strong>. The app clears the
+          recorded consent, stops sending data and returns to the notice, where you can agree again.
+          Withdrawing does not affect processing carried out before you withdrew, and it does not
+          delete your account — your routines, workouts and profile are kept until you delete them,
+          which you can do at any time as described above.
+        </p>
+        <p>
+          If you are in the People&apos;s Republic of China, the Personal Information Protection Law
+          also gives you the right to know and decide how your personal information is handled, to
+          access and copy it, to correct it, to delete it, and to withdraw consent — all of which
+          the app and the pages above support.
         </p>
       </Section>
 
