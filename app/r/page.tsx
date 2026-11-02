@@ -2,6 +2,8 @@
 
 import React, { useEffect, useMemo, useState } from 'react'
 
+import { libraryEntry } from './exerciseNames'
+
 /* ===========================================================================
  * The page a shared routine link lands on.
  * ---------------------------------------------------------------------------
@@ -24,10 +26,10 @@ const APK_DOWNLOAD_URL =
 /*
  * Where a recipient without the app is sent. The landing page is the install
  * funnel: it explains what RepForge is and carries the APK download, which a
- * bare shared routine cannot do. Kept absolute because this route is served
- * from a sub-path on GitHub Pages.
+ * bare shared routine cannot do. The custom domain serves this site at its
+ * root, so the old github.io project path is not a page any more.
  */
-const LANDING_URL = 'https://rahul26scs1003001315-dotcom.github.io/repforge-landing/'
+const LANDING_URL = 'https://repforge.website/'
 
 /*
  * How long to wait for the OS to hand the deep link to the app before concluding
@@ -120,6 +122,69 @@ const isRecord = (value: unknown): value is Record<string, unknown> =>
 const toPositiveInt = (value: unknown, fallback: number): number =>
   typeof value === 'number' && Number.isFinite(value) && value > 0 ? Math.floor(value) : fallback
 
+/**
+ * A readable name from an id, for a movement this page has no name for.
+ *
+ * The table below the app's library is generated, so it can be a release behind a
+ * library that just gained a movement. Rejecting the link then would throw away a
+ * whole routine over one label, so the id — a slug of the name — is read out
+ * instead.
+ */
+const nameFromId = (id: string): string =>
+  id
+    .split('-')
+    .filter(Boolean)
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ')
+
+/**
+ * One exercise, in either wire form.
+ *
+ * `[id, sets, reps]` is the compact tuple the app writes now: the name and group
+ * are dropped because the id names a library movement, and the app resolves them
+ * from its own library on the way back in. This page has no library, so it
+ * carries a generated table of the same names (`exerciseNames.ts`) and resolves
+ * them the same way. A custom movement — and every link written before the
+ * compaction — still carries the strings, and those win when present. Reading
+ * only the old object form is what left every new link on "not complete".
+ */
+const parseExercise = (entry: unknown): SharedExercise | null => {
+  if (Array.isArray(entry)) {
+    const [exerciseId, sets, reps, customName, customGroup] = entry
+    if (typeof exerciseId !== 'string' || !exerciseId) return null
+    const library = libraryEntry(exerciseId)
+    const name =
+      typeof customName === 'string' && customName.trim()
+        ? customName.trim()
+        : (library?.name ?? nameFromId(exerciseId))
+    const group =
+      typeof customGroup === 'string' && customGroup.trim() ? customGroup.trim() : library?.group
+    return {
+      exerciseId,
+      name,
+      ...(group ? { group } : {}),
+      sets: toPositiveInt(sets, 1),
+      reps: toPositiveInt(reps, 1),
+    }
+  }
+
+  if (!isRecord(entry)) return null
+  if (typeof entry.i !== 'string' || !entry.i) return null
+  const library = libraryEntry(entry.i)
+  const name =
+    typeof entry.m === 'string' && entry.m.trim()
+      ? entry.m.trim()
+      : (library?.name ?? nameFromId(entry.i))
+  const group = typeof entry.g === 'string' && entry.g ? entry.g : library?.group
+  return {
+    exerciseId: entry.i,
+    name,
+    ...(group ? { group } : {}),
+    sets: toPositiveInt(entry.s, 1),
+    reps: toPositiveInt(entry.r, 1),
+  }
+}
+
 /** Anything that is not exactly the shape the app writes is rejected outright. */
 const parsePayload = (value: unknown): SharedRoutine | null => {
   if (!isRecord(value)) return null
@@ -129,16 +194,9 @@ const parsePayload = (value: unknown): SharedRoutine | null => {
 
   const exercises: SharedExercise[] = []
   for (const entry of value.e) {
-    if (!isRecord(entry)) return null
-    if (typeof entry.i !== 'string' || !entry.i) return null
-    if (typeof entry.m !== 'string' || !entry.m.trim()) return null
-    exercises.push({
-      exerciseId: entry.i,
-      name: entry.m,
-      ...(typeof entry.g === 'string' && entry.g ? { group: entry.g } : {}),
-      sets: toPositiveInt(entry.s, 1),
-      reps: toPositiveInt(entry.r, 1),
-    })
+    const exercise = parseExercise(entry)
+    if (!exercise) return null
+    exercises.push(exercise)
   }
 
   if (!exercises.length) return null
