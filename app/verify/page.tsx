@@ -5,6 +5,9 @@ import { HandoffToApp } from '../HandoffToApp'
 export const metadata = {
   title: 'Confirm your RepForge account',
   robots: { index: false, follow: false },
+  // The confirmation code travels in this URL. Nothing here should hand the full
+  // address to anywhere else, not even in a Referer header.
+  referrer: 'no-referrer',
 }
 
 /**

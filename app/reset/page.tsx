@@ -5,6 +5,8 @@ import { HandoffToApp } from '../HandoffToApp'
 export const metadata = {
   title: 'Reset your RepForge password',
   robots: { index: false, follow: false },
+  // The recovery token travels in this URL; nothing should leak it in a Referer.
+  referrer: 'no-referrer',
 }
 
 /**

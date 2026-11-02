@@ -207,7 +207,19 @@ const parsePayload = (value: unknown): SharedRoutine | null => {
   }
 }
 
+/**
+ * A ceiling on what will be decoded at all.
+ *
+ * The payload arrives in the URL, so it is whoever-sent-the-link's choice how
+ * large it is: without a cap, a multi-megabyte `?d=` makes this page base64-decode
+ * and JSON-parse megabytes on a phone before rejecting it. The app's own links are
+ * a few hundred bytes — 200 exercises of compact tuples is still under 8 kB — so
+ * anything above this is not a routine we can render anyway.
+ */
+const MAX_PAYLOAD_CHARS = 8000
+
 const decodePayload = (payload: string): SharedRoutine | null => {
+  if (payload.length > MAX_PAYLOAD_CHARS) return null
   const json = base64UrlDecode(payload)
   if (json === null) return null
   try {
