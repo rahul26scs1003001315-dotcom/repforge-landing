@@ -42,8 +42,9 @@ export default function StatsPage() {
             install count.
           </p>
           <p>
-            <span className="font-semibold text-slate-200">Registered users</span> is a row count from
-            the accounts table. It includes accounts created before this counter existed.
+            <span className="font-semibold text-slate-200">Account count</span> is not published here.
+            The number of registered people is business data, and this endpoint answers to any browser,
+            so it is read locally with the service key instead.
           </p>
           <p className="text-slate-500">
             Nothing here is tamper-proof: the counting endpoint is public by necessity, so someone

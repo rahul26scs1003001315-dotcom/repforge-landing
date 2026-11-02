@@ -3,16 +3,19 @@
 import { useEffect, useState } from 'react'
 
 /**
- * Reads the aggregate numbers from `site_stats()` — visits, download starts and
- * the number of registered accounts. The function returns three totals and two
- * today-figures, never a per-user row, so nothing here identifies anybody.
+ * Reads the aggregate numbers from `site_stats()` — visits and download starts.
+ * The function returns totals and today-figures, never a per-user row, so nothing
+ * here identifies anybody.
+ *
+ * The account count is deliberately absent: this endpoint answers to any browser
+ * that loads the site, and the number of customers is business data. `npm run
+ * stats` reads it locally with the service key.
  */
 type Stats = {
   visits_total: number
   visits_today: number
   downloads_total: number
   downloads_today: number
-  users_total: number
   days_tracked: number
 }
 
@@ -71,7 +74,6 @@ export default function StatsPanel() {
   const cards = [
     { label: 'Page views', value: stats.visits_total, today: stats.visits_today },
     { label: 'Download starts', value: stats.downloads_total, today: stats.downloads_today },
-    { label: 'Registered users', value: stats.users_total, today: null },
     { label: 'Days tracked', value: stats.days_tracked, today: null },
   ]
 
