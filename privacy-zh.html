@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>RepForge 隐私政策</title>
+    <meta
+      name="description"
+      content="RepForge 会处理哪些数据、存放在哪里、如何删除。无广告、无第三方统计、无崩溃上报。"
+    />
+    <style>
+      :root {
+        color-scheme: light;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: #ffffff;
+        color: #101014;
+        font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Hiragino Sans GB',
+          'Microsoft YaHei', 'Noto Sans SC', system-ui, sans-serif;
+        line-height: 1.75;
+      }
+      main {
+        max-width: 760px;
+        margin: 0 auto;
+        padding: 56px 22px 72px;
+      }
+      a {
+        color: #d94a25;
+      }
+      .back {
+        font-size: 14px;
+        font-weight: 700;
+        text-decoration: none;
+      }
+      h1 {
+        margin: 26px 0 6px;
+        font-size: 30px;
+        line-height: 1.25;
+        letter-spacing: -0.4px;
+      }
+      .meta {
+        color: #62626c;
+        font-size: 14px;
+        margin: 0 0 8px;
+      }
+      .lang {
+        display: inline-block;
+        margin-bottom: 26px;
+        font-size: 14px;
+        font-weight: 700;
+      }
+      h2 {
+        margin: 34px 0 8px;
+        font-size: 18px;
+        letter-spacing: -0.2px;
+      }
+      p,
+      li {
+        font-size: 15px;
+      }
+      ul {
+        padding-left: 22px;
+      }
+      li {
+        margin: 6px 0;
+      }
+      .note {
+        margin-top: 40px;
+        padding-top: 18px;
+        border-top: 1px solid #e6e6ea;
+        color: #62626c;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <a class="back" href="/">&larr; RepForge</a>
+      <h1>RepForge 隐私政策</h1>
+      <p class="meta">生效日期：2026 年 11 月 2 日</p>
+      <a class="lang" href="/privacy">English version</a>
+
+      <p>
+        RepForge 是一款面向 Android 的力量训练记录应用。本页说明应用处理哪些数据、为什么处理、存放在哪里，以及你如何删除它们。应用内没有广告
+        SDK、没有第三方统计分析、没有崩溃上报 SDK。
+      </p>
+
+      <h2>责任方</h2>
+      <p>
+        RepForge 由个人开发者 rahul mandal（拉胡尔·曼达尔）开发并运营，AppGallery
+        开发者账号为 rahul mandal（ID：hid46314285）。任何隐私问题或请求，请发送邮件至
+        <a href="mailto:www.repforge@gmail.com">www.repforge@gmail.com</a>。
+      </p>
+
+      <h2>账户中存储的数据</h2>
+      <ul>
+        <li><strong>账户身份：</strong>电子邮箱地址与密码。认证由 Supabase Auth 处理，应用不读取你的密码。</li>
+        <li><strong>个人资料：</strong>昵称、可选的手机号，以及账户角色（成员或所有者）。</li>
+        <li><strong>训练数据：</strong>训练计划（动作、组数、次数）、已完成的训练（日期、时长、每组次数与重量），以及你创建的目标或里程碑。</li>
+        <li><strong>所有者审计日志：</strong>所有者账户删除记录时留下的内容与时间，仅对该所有者账户可见。</li>
+      </ul>
+
+      <h2>仅保存在本机的数据</h2>
+      <ul>
+        <li>训练计划、历史记录与个人资料的本地副本，使应用可以离线打开。</li>
+        <li>进行中的训练，以便中断后继续。</li>
+        <li>外观与通知设置，以及等待同步的变更队列。</li>
+      </ul>
+      <p>除上述账户数据外，这些内容不会离开设备。通知由本机排程，没有推送服务器接收设备令牌。</p>
+
+      <h2>更新检查</h2>
+      <p>
+        启动时应用会向 Expo 的更新服务（EAS Update）询问是否有新的 JavaScript
+        包。该请求携带一个随机的安装标识（EAS-Client-ID）、应用与运行时版本、平台信息，仅用于下发更新，不是广告标识，不与账户关联，也不用于统计分析。清除应用数据会重置该标识。
+      </p>
+
+      <h2>语音记录</h2>
+      <p>
+        语音记录为可选功能，只有在你打开语音面板时才会启用。录音期间麦克风处于开启状态；停止录音后，音频片段会发送到 RepForge
+        的转写服务，由其转发给 Google Speech-to-Text 并返回文字结果。
+      </p>
+      <p>
+        音频仅在该请求期间保存在内存中，<strong>不会被存储</strong>：RepForge
+        与该服务都不会把片段写入磁盘、数据库或日志。转写结果回显在面板中，只有你确认记录该组时，确认的数值才会随训练一起保存。如果从不打开语音面板，就不会录制任何音频。
+      </p>
+
+      <h2>从不收集的内容</h2>
+      <p>
+        位置、通讯录、相机、相册、已安装应用列表、广告标识符以及使用行为统计。麦克风仅用于上述语音记录，且不会在后台运行。RepForge
+        不使用 Google Analytics、Firebase Analytics、Crashlytics 或任何同类服务。
+      </p>
+
+      <h2>处理目的</h2>
+      <ul>
+        <li>创建并保护你的账户，完成登录。</li>
+        <li>保存你的训练计划、训练记录与目标，并展示给你。</li>
+        <li>在你的设备之间同步变更，并让应用可离线使用。</li>
+        <li>让你从自己导出的备份中恢复数据。</li>
+        <li>在你使用语音记录时，把口述的一组转写为文字。</li>
+      </ul>
+      <p>数据不用于广告、画像或自动化决策，也不会被出售。</p>
+
+      <h2>处理者</h2>
+      <p>
+        账户与训练数据托管在本项目的 Supabase 数据库；应用更新由 Expo 的 EAS Update
+        服务下发；语音片段由 Google Speech-to-Text 转写。三者均按 RepForge
+        的指示作为数据处理者行事。数据不出售、不出租、不与广告商共享。行级安全策略确保每一行数据只属于创建它的账户。
+      </p>
+
+      <h2>安全</h2>
+      <p>
+        应用与后端之间的通信使用 HTTPS/TLS 加密。密码由 Supabase Auth
+        以哈希形式保存，应用无法读取。数据库访问规则将每个训练计划、训练记录与个人资料限制在其所有者。
+      </p>
+
+      <h2>保留与删除</h2>
+      <p>
+        数据在账户存在期间保留。你可以在应用内删除账户及其全部数据：<strong>我的 → 删除账户 → 删除我的账户</strong>。这会移除个人资料、训练计划、训练历史、目标与审计记录。
+      </p>
+      <p>
+        如果无法打开应用，请使用<a href="/delete-account">网页删除页面</a>，或用账户邮箱发邮件至
+        <a href="mailto:www.repforge@gmail.com">www.repforge@gmail.com</a>。删除请求会在 30
+        天内完成，加密备份中的残留副本也会在同一期限内清除。
+      </p>
+
+      <h2>你的权利</h2>
+      <p>
+        你可以在应用内访问并更正数据，随时从「我的 → 数据备份」导出 JSON 或 CSV 备份，并按上述方式删除账户。依据《中华人民共和国个人信息保护法》，你有权查阅、复制、更正、删除你的个人信息，也有权撤回同意；撤回同意后可再次进入应用的隐私同意页面重新选择。撤回同意不影响撤回前基于同意已进行的处理。
+      </p>
+
+      <h2>儿童</h2>
+      <p>
+        RepForge 不面向 13 岁以下儿童，也不会在知情情况下为其创建账户。如你认为有儿童创建了账户，请发送邮件至
+        <a href="mailto:www.repforge@gmail.com">www.repforge@gmail.com</a>，该账户将被删除。
+      </p>
+
+      <h2>政策变更</h2>
+      <p>
+        如果应用处理的数据发生变化，本页会更新并修改上方的生效日期。重大变更会在应用的更新说明中注明，并在应用内重新征求同意。
+      </p>
+
+      <p class="note">
+        有疑问？请发送邮件至
+        <a href="mailto:www.repforge@gmail.com">www.repforge@gmail.com</a>。英文版本：<a href="/privacy">/privacy</a>。
+      </p>
+    </main>
+  </body>
+</html>
