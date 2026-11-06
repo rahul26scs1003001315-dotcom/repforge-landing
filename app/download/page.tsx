@@ -14,7 +14,7 @@ const APK_URL =
   'https://github.com/rahul26scs1003001315-dotcom/repforge-releases/releases/latest/download/repforge.apk'
 const APK_VERSION = '1.0.20'
 const APK_BYTES = 50056765
-const APK_SHA256 = '8b9d1008cca9485b1a3904fc9f753e50449a30d874f88ded4235e1e712eb4c93'
+const APK_SHA256 = '8e4d1cc5d72ac3998da1511f861e38b626b29033aa771af61e7b058c93fa48c6'
 
 const SIZE_MB = `${(APK_BYTES / 1048576).toFixed(1)} MB`
 
