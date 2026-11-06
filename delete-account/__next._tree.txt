@@ -1,4 +1,4 @@
-:HL["/_next/static/chunks/1w4h3hckzs3ax.css","style"]
+:HL["/_next/static/chunks/2f5b84dko4710.css","style"]
 2:[["children",{"s":"__PAGE__","h":160}]]
 1:[["children",{"s":"delete-account","h":96,"c":"$Q2"}]]
 0:{"b":"repforge-pages","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
