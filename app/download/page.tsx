@@ -13,8 +13,8 @@ export const metadata: Metadata = {
 const APK_URL =
   'https://github.com/rahul26scs1003001315-dotcom/repforge-releases/releases/latest/download/repforge.apk'
 const APK_VERSION = '1.0.20'
-const APK_BYTES = 50056765
-const APK_SHA256 = '8e4d1cc5d72ac3998da1511f861e38b626b29033aa771af61e7b058c93fa48c6'
+const APK_BYTES = 50095409
+const APK_SHA256 = 'c45c71e60242bf0af4c3458388864332e1f3d8e2bf65e310544da9442d73e109'
 
 const SIZE_MB = `${(APK_BYTES / 1048576).toFixed(1)} MB`
 
