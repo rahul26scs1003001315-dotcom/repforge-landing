@@ -1,22 +1,24 @@
 'use client'
 
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { libraryEntry } from './exerciseNames'
 
 /* ===========================================================================
  * The page a shared routine link lands on.
  * ---------------------------------------------------------------------------
- * The app shares `repforge://routine?d=<payload>`, but messaging apps only
- * linkify http(s) URLs — iMessage, WhatsApp and SMS all render a custom scheme
- * as dead text — so the message carries THIS page's https URL instead. The page
- * shows the routine to whoever received it, and hands off to the app by opening
- * the same `repforge://routine?d=<payload>` deep link the app already answers on.
+ * The app shares `repforge://routine?c=<code>`, but messaging apps only linkify
+ * http(s) URLs — iMessage, WhatsApp and SMS all render a custom scheme as dead
+ * text — so the message carries THIS page's https URL instead. The page shows
+ * the routine to whoever received it, and hands off to the app by opening the
+ * same `repforge://routine?c=<code>` deep link the app answers on.
  *
- * The payload travels in the URL, so this page needs no server, no database and
- * no shortener: a link cannot expire, and it works offline once loaded. Keeping
- * the decode here byte-for-byte compatible with src/services/routineShare.ts is
- * what makes that work — see decodePayload below.
+ * Two link shapes arrive here. `?c=<code>` is what the app sends now: the routine
+ * is stored in Supabase and the link is twelve characters, so chat apps stop
+ * truncating it and nothing is lost on the way. `?d=<payload>` is the older
+ * self-contained link, which still works — the routine is decoded straight out
+ * of the URL exactly as before. Keeping that decode byte-for-byte compatible with
+ * src/services/routineShare.ts is what makes old links keep working.
  * =========================================================================== */
 
 const APP_SCHEME_LINK = 'repforge://routine'
@@ -236,6 +238,50 @@ const payloadFromLocation = (): string => {
   return search.get('d') ?? hash.get('d') ?? ''
 }
 
+/*
+ * A short link's code, and the routine it points at.
+ *
+ * The code is checked against the shape the server mints before it is put in a
+ * request: a mangled or half-pasted link is answered with "not complete" rather
+ * than with a query that cannot match a row. `read_shared_routine` returns the
+ * stored record — the same wire shape an inline payload carries — so both link
+ * kinds are rendered by one parser.
+ *
+ * The published anon key is the one already shipped to every browser by the
+ * counters on the stats page; the function it calls returns exactly the routine
+ * whose code it was given, and nothing else.
+ */
+const CODE_PATTERN = /^[A-Za-z0-9_-]{8,32}$/
+const SUPABASE_URL = process.env.NEXT_PUBLIC_SUPABASE_URL
+const SUPABASE_ANON_KEY = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY
+
+const codeFromLocation = (): string => {
+  const search = new URLSearchParams(window.location.search)
+  const hash = new URLSearchParams(window.location.hash.replace(/^#/, ''))
+  const code = search.get('c') ?? hash.get('c') ?? ''
+  return CODE_PATTERN.test(code) ? code : ''
+}
+
+/** The routine a code points at, or null when it cannot be read. */
+const fetchRoutine = async (code: string): Promise<SharedRoutine | null> => {
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) return null
+  try {
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/rpc/read_shared_routine`, {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        apikey: SUPABASE_ANON_KEY,
+        authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+      },
+      body: JSON.stringify({ p_code: code }),
+    })
+    if (!response.ok) return null
+    return parsePayload(await response.json())
+  } catch {
+    return null
+  }
+}
+
 /* ---------------------------------------------------------------------------
  * Page
  * ------------------------------------------------------------------------- */
@@ -244,13 +290,46 @@ export default function SharedRoutinePage() {
   // Read from the live location instead of useSearchParams: the site is a static
   // export, and this keeps the page prerenderable.
   const [payload, setPayload] = useState<string | null>(null)
+  const [code, setCode] = useState('')
+  const [routine, setRoutine] = useState<SharedRoutine | null>(null)
+  // `loading` covers the fetch a code makes; a payload link is decoded on the
+  // spot and never shows it.
+  const [phase, setPhase] = useState<'loading' | 'ready' | 'empty'>('loading')
 
   useEffect(() => {
-    setPayload(payloadFromLocation())
+    const linkCode = codeFromLocation()
+    if (linkCode) {
+      setCode(linkCode)
+      return
+    }
+    const inline = payloadFromLocation()
+    if (!inline) {
+      setPhase('empty')
+      return
+    }
+    setPayload(inline)
+    setRoutine(decodePayload(inline))
+    setPhase('ready')
   }, [])
 
-  const routine = useMemo(() => (payload ? decodePayload(payload) : null), [payload])
-  const deepLink = payload ? `${APP_SCHEME_LINK}?d=${payload}` : ''
+  useEffect(() => {
+    if (!code) return
+    let cancelled = false
+    void fetchRoutine(code).then((found) => {
+      if (cancelled) return
+      setRoutine(found)
+      setPhase('ready')
+    })
+    return () => {
+      cancelled = true
+    }
+  }, [code])
+
+  const deepLink = code
+    ? `${APP_SCHEME_LINK}?c=${code}`
+    : payload
+      ? `${APP_SCHEME_LINK}?d=${payload}`
+      : ''
   const [opened, setOpened] = useState(false)
 
   /*
@@ -302,17 +381,20 @@ export default function SharedRoutinePage() {
     }
   }, [routine, deepLink])
 
-  if (payload === null) {
+  if (phase === 'loading') {
     return <Shell><p className="text-muted">Loading routine…</p></Shell>
   }
 
   if (!routine) {
     return (
       <Shell>
-        <h1 className="text-3xl font-black tracking-tight text-ink">That link is not complete</h1>
+        <h1 className="text-3xl font-black tracking-tight text-ink">
+          {code ? 'That routine could not be opened' : 'That link is not complete'}
+        </h1>
         <p className="mt-3 text-muted">
-          The routine did not survive the trip — chat apps sometimes cut long links in half. Ask
-          for it again, or open RepForge and paste the whole link.
+          {code
+            ? 'The code may be mistyped or the link was cut short, or this page could not reach RepForge. Check your connection and open the link again, or ask for a fresh one.'
+            : 'The routine did not survive the trip — chat apps sometimes cut long links in half. Ask for it again, or open RepForge and paste the whole link.'}
         </p>
         <a
           href={APK_DOWNLOAD_URL}
