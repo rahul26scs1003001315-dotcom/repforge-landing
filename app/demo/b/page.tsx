@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Mesh } from '../_components/mesh'
 import { Reveal } from '../_components/reveal'
+import { playStoreUrl } from '../../../lib/links'
 
 const APK_DOWNLOAD_URL =
   'https://github.com/rahul26scs1003001315-dotcom/repforge-releases/releases/latest/download/repforge.apk'
@@ -311,12 +312,21 @@ function Hero({
             contraction, and the record drops into place the moment you let go.
           </p>
 
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
             <a
               href={APK_DOWNLOAD_URL}
               className="group inline-flex items-center justify-center gap-2.5 rounded-2xl bg-gradient-to-r from-rose-500 to-rose-600 px-7 py-4 text-base font-bold text-white shadow-[0_16px_40px_-12px_rgba(244,63,94,0.8)] transition-all duration-300 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] hover:-translate-y-1 active:scale-[0.98]"
             >
               Download for Android
+            </a>
+            <a
+              href={playStoreUrl('homepage')}
+              className="inline-flex items-center justify-center gap-2.5 rounded-2xl border border-white/[0.12] bg-white/[0.03] px-7 py-4 text-base font-semibold text-white backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-white/25 hover:bg-white/[0.07]"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+                <path d="M3.6 2.4a1.5 1.5 0 0 0-.5 1.1v17a1.5 1.5 0 0 0 .5 1.1l9.2-9.6-9.2-9.6zm10.6 8.4 2.9-3-9.3-5.3a1.5 1.5 0 0 0-.3-.1l6.7 8.4zm0 2.4-6.7 8.4c.1 0 .2 0 .3-.1l9.3-5.3-2.9-3zm4.2-1.2 2.5 1.4c1 .6 1 1.9 0 2.4l-2.5 1.4-3.2-2.6 3.2-2.6z" />
+              </svg>
+              Get it on Google Play
             </a>
             <a
               href="#matrix"
