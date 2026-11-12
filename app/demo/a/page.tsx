@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { useEffect, useMemo, useState } from 'react'
 import { Mesh } from '../_components/mesh'
 import { Reveal } from '../_components/reveal'
+import { PLAY_STORE_URL } from '../../../lib/links'
 
 const APK_DOWNLOAD_URL =
   // The homepage sends every download to our own page rather than straight to
@@ -355,6 +356,12 @@ function Nav({ live }: { live: boolean }) {
           >
             Download for Android
           </a>
+          <a
+            href={PLAY_STORE_URL}
+            className="mt-2 block rounded-xl border border-white/[0.12] px-4 py-3 text-center text-sm font-semibold text-slate-200"
+          >
+            Get it on Google Play
+          </a>
         </div>
       )}
     </header>
@@ -399,7 +406,7 @@ function Hero() {
             log each set in two taps, and watch the numbers prove the work.
           </p>
 
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
             <a
               href={APK_DOWNLOAD_URL}
               className="group inline-flex items-center justify-center gap-2.5 rounded-2xl bg-gradient-to-r from-rose-500 to-rose-600 px-7 py-4 text-base font-bold text-white shadow-[0_16px_40px_-12px_rgba(244,63,94,0.8)] transition-all duration-300 ease-[cubic-bezier(0.175,0.885,0.32,1.275)] hover:-translate-y-1 hover:shadow-[0_22px_50px_-12px_rgba(244,63,94,0.9)] active:scale-[0.98]"
@@ -408,6 +415,15 @@ function Hero() {
                 <path d="M17.6 9.48l1.84-3.18a.38.38 0 0 0-.66-.38l-1.87 3.23a11.4 11.4 0 0 0-9.82 0L5.22 5.92a.38.38 0 1 0-.66.38L6.4 9.48A10.9 10.9 0 0 0 .9 18h22.2a10.9 10.9 0 0 0-5.5-8.52zM7 15.25a1.1 1.1 0 1 1 0-2.2 1.1 1.1 0 0 1 0 2.2zm10 0a1.1 1.1 0 1 1 0-2.2 1.1 1.1 0 0 1 0 2.2z" />
               </svg>
               Download for Android
+            </a>
+            <a
+              href={PLAY_STORE_URL}
+              className="inline-flex items-center justify-center gap-2.5 rounded-2xl border border-white/[0.12] bg-white/[0.03] px-7 py-4 text-base font-semibold text-white backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-white/25 hover:bg-white/[0.07]"
+            >
+              <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">
+                <path d="M3.6 2.4a1.5 1.5 0 0 0-.5 1.1v17a1.5 1.5 0 0 0 .5 1.1l9.2-9.6-9.2-9.6zm10.6 8.4 2.9-3-9.3-5.3a1.5 1.5 0 0 0-.3-.1l6.7 8.4zm0 2.4-6.7 8.4c.1 0 .2 0 .3-.1l9.3-5.3-2.9-3zm4.2-1.2 2.5 1.4c1 .6 1 1.9 0 2.4l-2.5 1.4-3.2-2.6 3.2-2.6z" />
+              </svg>
+              Get it on Google Play
             </a>
             <a
               href="#hub"
@@ -424,7 +440,7 @@ function Hero() {
             >
               All download options
             </a>{' '}
-            — direct APK, AppGallery and the Amazon Appstore.
+            — Google Play, direct APK, AppGallery and the Amazon Appstore.
           </p>
 
           <dl className="mt-10 grid max-w-md grid-cols-3 gap-3">

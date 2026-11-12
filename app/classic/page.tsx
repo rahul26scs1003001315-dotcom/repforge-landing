@@ -15,7 +15,10 @@ const APK_DOWNLOAD_URL =
   'https://github.com/rahul26scs1003001315-dotcom/repforge-releases/releases/latest/download/repforge.apk'
 
 const APP_STORE_URL = '' // TODO: paste your App Store link, e.g. https://apps.apple.com/app/id000000000
-const GOOGLE_PLAY_URL = '' // TODO: paste your Google Play link, e.g. https://play.google.com/store/apps/details?id=com.rahul_00.repforge
+// The package id, not a name search: another developer publishes
+// "RepForge: Gym Workout Tracker" as com.srujan1527.repforge, so a search for the
+// app name can land on theirs.
+const GOOGLE_PLAY_URL = 'https://play.google.com/store/apps/details?id=com.repforge'
 
 /* ========================================================================= */
 

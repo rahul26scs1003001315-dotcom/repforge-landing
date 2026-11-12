@@ -1,11 +1,12 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import DownloadLink from '../../components/DownloadLink'
+import { PLAY_STORE_URL } from '../../lib/links'
 
 export const metadata: Metadata = {
-  title: 'Download RepForge — Android APK, AppGallery and Amazon Appstore',
+  title: 'Download RepForge — Google Play, Android APK, AppGallery and Amazon Appstore',
   description:
-    'Every way to install RepForge on Android: the signed APK with its checksum, Huawei AppGallery and the Amazon Appstore.',
+    'Every way to install RepForge on Android: Google Play, the signed APK with its checksum, Huawei AppGallery and the Amazon Appstore.',
   alternates: { canonical: 'https://repforge.website/download' },
 }
 
@@ -19,11 +20,21 @@ const APK_SHA256 = '7f6e746632d098ae6248459275c1614735a2219d80deb06444eecb006fa7
 const SIZE_MB = `${(APK_BYTES / 1048576).toFixed(1)} MB`
 
 /**
- * Store links point at each store's search results rather than a listing id.
- * A wrong listing id is a dead link, and the ids live in the consoles, not in
- * this repository; search always resolves to whatever the store is serving.
+ * Store links.
+ *
+ * Google Play is the exception to "search always resolves": another developer
+ * publishes "RepForge: Gym Workout Tracker" as `com.srujan1527.repforge`, so a
+ * name search there lands on the wrong app. The package id is the only URL that
+ * cannot be confused. The other two stores have no such clash, and their listing
+ * ids live in the consoles rather than this repository, so search is still the
+ * honest link for them.
  */
 const STORES = [
+  {
+    name: 'Google Play',
+    href: PLAY_STORE_URL,
+    note: 'The store install: managed updates, no sideloading, and the listing has to pass Play review before a build arrives.',
+  },
   {
     name: 'Huawei AppGallery',
     href: 'https://appgallery.huawei.com/search/RepForge',
