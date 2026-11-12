@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useEffect, useMemo, useState } from 'react'
 import { Mesh } from '../_components/mesh'
 import { Reveal } from '../_components/reveal'
-import { PLAY_STORE_URL } from '../../../lib/links'
+import { playStoreUrl } from '../../../lib/links'
 
 const APK_DOWNLOAD_URL =
   // The homepage sends every download to our own page rather than straight to
@@ -357,7 +357,7 @@ function Nav({ live }: { live: boolean }) {
             Download for Android
           </a>
           <a
-            href={PLAY_STORE_URL}
+            href={playStoreUrl('homepage')}
             className="mt-2 block rounded-xl border border-white/[0.12] px-4 py-3 text-center text-sm font-semibold text-slate-200"
           >
             Get it on Google Play
@@ -417,7 +417,7 @@ function Hero() {
               Download for Android
             </a>
             <a
-              href={PLAY_STORE_URL}
+              href={playStoreUrl('homepage')}
               className="inline-flex items-center justify-center gap-2.5 rounded-2xl border border-white/[0.12] bg-white/[0.03] px-7 py-4 text-base font-semibold text-white backdrop-blur-md transition-all duration-300 hover:-translate-y-0.5 hover:border-white/25 hover:bg-white/[0.07]"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true" fill="currentColor">

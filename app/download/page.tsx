@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import DownloadLink from '../../components/DownloadLink'
-import { PLAY_STORE_URL } from '../../lib/links'
+import { playStoreUrl } from '../../lib/links'
 
 export const metadata: Metadata = {
   title: 'Download RepForge — Google Play, Android APK, AppGallery and Amazon Appstore',
@@ -32,7 +32,7 @@ const SIZE_MB = `${(APK_BYTES / 1048576).toFixed(1)} MB`
 const STORES = [
   {
     name: 'Google Play',
-    href: PLAY_STORE_URL,
+    href: playStoreUrl('download'),
     note: 'The store install: managed updates, no sideloading, and the listing has to pass Play review before a build arrives.',
   },
   {

@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react'
 
 import { libraryEntry } from './exerciseNames'
+import { playStoreUrl } from '../../lib/links'
 
 /* ===========================================================================
  * The page a shared routine link lands on.
@@ -22,16 +23,19 @@ import { libraryEntry } from './exerciseNames'
  * =========================================================================== */
 
 const APP_SCHEME_LINK = 'repforge://routine'
-const APK_DOWNLOAD_URL =
-  'https://github.com/rahul26scs1003001315-dotcom/repforge-releases/releases/latest/download/repforge.apk'
 
 /*
- * Where a recipient without the app is sent. The landing page is the install
- * funnel: it explains what RepForge is and carries the APK download, which a
- * bare shared routine cannot do. The custom domain serves this site at its
- * root, so the old github.io project path is not a page any more.
+ * Where a recipient without the app is sent.
+ *
+ * Straight to the Play listing, not to the APK: someone who was sent a routine
+ * wants to be training in a minute, and a store install is one tap with updates
+ * managed afterwards. The listing is addressed by package id — a Play search for
+ * the app name returns another developer's app (see lib/links.ts).
+ *
+ * The APK has not gone away: the footer links to /download, which is where
+ * someone who cannot use Play, or who wants the checksum first, still lands.
  */
-const LANDING_URL = 'https://repforge.website/'
+const INSTALL_URL = playStoreUrl('routine-share')
 
 /*
  * How long to wait for the OS to hand the deep link to the app before concluding
@@ -370,7 +374,7 @@ export default function SharedRoutinePage() {
 
     const fallbackTimer = window.setTimeout(() => {
       if (handedOff || document.visibilityState === 'hidden') return
-      window.location.replace(LANDING_URL)
+      window.location.replace(INSTALL_URL)
     }, APP_HANDOFF_TIMEOUT_MS)
 
     return () => {
@@ -397,10 +401,10 @@ export default function SharedRoutinePage() {
             : 'The routine did not survive the trip — chat apps sometimes cut long links in half. Ask for it again, or open RepForge and paste the whole link.'}
         </p>
         <a
-          href={APK_DOWNLOAD_URL}
+          href={INSTALL_URL}
           className="mt-8 inline-block rounded-2xl bg-brand px-7 py-4 text-base font-extrabold text-white no-underline"
         >
-          Get RepForge for Android
+          Get RepForge on Google Play
         </a>
       </Shell>
     )
@@ -454,16 +458,20 @@ export default function SharedRoutinePage() {
       </a>
       <p className="mt-3 text-center text-sm text-muted">
         {opened
-          ? 'If nothing happened, tap the button above. No app on this device? You are being taken to the download page.'
+          ? 'If nothing happened, tap the button above. No app on this device? You are being taken to Google Play.'
           : 'On a phone this opens the app automatically. The routine above is the whole plan, so it can be built by hand anywhere.'}
       </p>
 
       <p className="mt-8 border-t border-hairline pt-6 text-center text-sm text-muted">
         No RepForge on this phone yet?{' '}
-        <a href={APK_DOWNLOAD_URL} className="font-bold text-sky no-underline">
-          Download it for Android
+        <a href={INSTALL_URL} className="font-bold text-sky no-underline">
+          Install it from Google Play
+        </a>{' '}
+        and open this link again. Prefer the APK?{' '}
+        <a href="/download" className="font-bold text-sky no-underline">
+          All install options
         </a>
-        , then open this link again.
+        .
       </p>
     </Shell>
   )

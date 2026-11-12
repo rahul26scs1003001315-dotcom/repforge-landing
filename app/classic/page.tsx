@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link'
+import { playStoreUrl } from '../../lib/links'
 
 /* ===========================================================================
  * CONFIG — paste your store links here.
@@ -17,8 +18,9 @@ const APK_DOWNLOAD_URL =
 const APP_STORE_URL = '' // TODO: paste your App Store link, e.g. https://apps.apple.com/app/id000000000
 // The package id, not a name search: another developer publishes
 // "RepForge: Gym Workout Tracker" as com.srujan1527.repforge, so a search for the
-// app name can land on theirs.
-const GOOGLE_PLAY_URL = 'https://play.google.com/store/apps/details?id=com.repforge'
+// app name can land on theirs. Tagged so Play Console attributes the install to
+// this page rather than "untagged".
+const GOOGLE_PLAY_URL = playStoreUrl('classic')
 
 /* ========================================================================= */
 
