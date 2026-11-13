@@ -13,9 +13,9 @@ export const metadata: Metadata = {
 /** The permanent release URL. Bump the three constants below when 1.0.16 ships. */
 const APK_URL =
   'https://github.com/rahul26scs1003001315-dotcom/repforge-releases/releases/latest/download/repforge.apk'
-const APK_VERSION = '1.0.26'
-const APK_BYTES = 48906045
-const APK_SHA256 = '59a54e382c6c1446a08ab01dc46591188a99a08f41c80291492b60be3d2a968f'
+const APK_VERSION = '1.0.25'
+const APK_BYTES = 49669971
+const APK_SHA256 = '7f6e746632d098ae6248459275c1614735a2219d80deb06444eecb006fa72e50'
 
 const SIZE_MB = `${(APK_BYTES / 1048576).toFixed(1)} MB`
 
