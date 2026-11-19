@@ -1128,7 +1128,7 @@ function StackCommand() {
           </div>
 
           <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-white/[0.07] pt-4">
-            {['Row-level security', 'No ad SDK', 'No analytics SDK', 'Export or delete anytime'].map(
+            {['Row-level security', 'No ad-serving SDK', 'Analytics only if you opt in', 'Export or delete anytime'].map(
               (item) => (
                 <span key={item} className="flex items-center gap-2 text-[11px] font-semibold text-slate-400">
                   <span className="h-1 w-1 rounded-full bg-emerald-400" />
@@ -1236,7 +1236,7 @@ function Footer({ live }: { live: boolean }) {
       <div className="mx-auto flex max-w-6xl flex-col items-center justify-between gap-4 px-5 py-8 sm:flex-row sm:px-6">
         <p className="text-[11px] text-slate-500">
           {live
-            ? 'RepForge — free workout tracker. No ads, no trackers.'
+            ? 'RepForge — free workout tracker. No ads. Crash reports and two product events only if you opt in.'
             : 'RepForge — design demo A. Not the live page.'}
         </p>
         <div className="flex items-center gap-5">
