@@ -1128,7 +1128,7 @@ function StackCommand() {
           </div>
 
           <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-white/[0.07] pt-4">
-            {['Row-level security', 'No ad-serving SDK', 'Analytics only if you opt in', 'Export or delete anytime'].map(
+            {['Row-level security', 'No ad-serving SDK', 'Opt-in analytics', 'Export or delete anytime'].map(
               (item) => (
                 <span key={item} className="flex items-center gap-2 text-[11px] font-semibold text-slate-400">
                   <span className="h-1 w-1 rounded-full bg-emerald-400" />
