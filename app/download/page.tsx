@@ -4,9 +4,9 @@ import DownloadLink from '../../components/DownloadLink'
 import { playStoreUrl } from '../../lib/links'
 
 export const metadata: Metadata = {
-  title: 'Download RepForge — Google Play, Android APK, AppGallery and Amazon Appstore',
+  title: 'Download RepForge — Google Play, Android APK, AppGallery and Vivo App Store',
   description:
-    'Every way to install RepForge on Android: Google Play, the signed APK with its checksum, Huawei AppGallery and the Amazon Appstore.',
+    'Every way to install RepForge on Android: Google Play, the signed APK with its checksum, Huawei AppGallery and the Vivo App Store.',
   alternates: { canonical: 'https://repforge.website/download' },
 }
 
@@ -50,9 +50,14 @@ const STORES = [
     note: 'Listed as RepForge. A store copy is always behind the APK above while a release is in review — the direct download is the current build.',
   },
   {
-    name: 'Amazon Appstore',
-    href: 'https://www.amazon.com/s?k=RepForge&i=mobile-apps',
-    note: 'For Fire tablets and Amazon-installed Android devices.',
+    // vivo's developer console exposes no web listing and the global store has no
+    // public catalogue (appstore.vivo.com does not resolve; h5.appstore.vivo.com.cn
+    // is the separate China store, where this package is not listed). The market
+    // intent is the only link that reaches the live listing: on a vivo phone it
+    // opens that store at com.repforge, elsewhere the default market app handles it.
+    name: 'Vivo App Store',
+    href: 'market://details?id=com.repforge',
+    note: 'Live on vivo phones as RepForge. This opens the store app itself, so it does nothing in a desktop browser.',
   },
 ]
 
