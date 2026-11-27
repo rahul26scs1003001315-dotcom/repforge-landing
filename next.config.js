@@ -1,3 +1,5 @@
+const { readAppFacts } = require('./lib/appFacts.cjs')
+
 /** @type {import('next').NextConfig} */
 const REPO = 'repforge-landing'
 
@@ -18,4 +20,27 @@ const nextConfig = {
   ...(isPages ? { basePath: `/${REPO}`, assetPrefix: `/${REPO}` } : {}),
 }
 
-module.exports = nextConfig
+/**
+ * The figures the pages state about the app — its exercise count, the Android
+ * version it supports, and the APK it serves — are read from the app checkout on
+ * every build, never typed here. `lib/appFacts.cjs` explains where each comes from
+ * and refuses to guess; a build without that checkout fails instead of shipping
+ * yesterday's numbers.
+ *
+ * They go through `env` because the pages that show them are client components,
+ * which cannot read the filesystem; a static export inlines these at build time.
+ */
+module.exports = async () => {
+  const facts = await readAppFacts()
+  return {
+    ...nextConfig,
+    env: {
+      NEXT_PUBLIC_EXERCISE_COUNT: String(facts.library.total),
+      NEXT_PUBLIC_EXERCISE_COUNT_REPDB: String(facts.library.repdb),
+      NEXT_PUBLIC_ANDROID_MIN_VERSION: facts.android.version,
+      NEXT_PUBLIC_APK_VERSION: facts.apk.version,
+      NEXT_PUBLIC_APK_BYTES: String(facts.apk.bytes),
+      NEXT_PUBLIC_APK_SHA256: facts.apk.sha256,
+    },
+  }
+}

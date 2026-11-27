@@ -6,3 +6,4 @@ out
 .env
 .env.*
 tsconfig.tsbuildinfo
+.repforge-app-dir
