@@ -445,7 +445,7 @@ function Hero() {
 
           <dl className="mt-10 grid max-w-md grid-cols-3 gap-3">
             {[
-              { k: '160+', v: 'Exercises' },
+              { k: '162', v: 'Exercises' },
               { k: '0', v: 'Ads' },
               { k: '7.0+', v: 'Android' },
             ].map((stat) => (
