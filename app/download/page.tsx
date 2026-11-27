@@ -67,10 +67,17 @@ const STORES: Store[] = [
     // vivo's developer console exposes no web listing and the global store has no
     // public catalogue (appstore.vivo.com does not resolve; h5.appstore.vivo.com.cn
     // is the separate China store, where this package is not listed). The market
-    // intent is the only link that reaches the live listing: on a vivo phone it
-    // opens that store at com.repforge, elsewhere the default market app handles it.
+    // intent is the only link that reaches the live listing.
+    //
+    // It is addressed to vivo's store explicitly (`package=com.bbk.appstore`) rather
+    // than left to whichever app owns `market://`: on a phone where another store is
+    // the default market, a bare market link opens that store, which does not carry
+    // this app. The `scheme=market` keeps the data exactly the `details?id=<pkg>` the
+    // vivo docs specify; only the target package is pinned. A phone without the vivo
+    // store answers nothing, and the card says so instead of going quiet.
     name: 'Vivo App Store',
-    intent: 'market://details?id=com.repforge',
+    intent:
+      'intent://details?id=com.repforge#Intent;scheme=market;package=com.bbk.appstore;end',
     note: 'Live on vivo phones as RepForge. Tap this on the phone to open the store app; browsers on a computer cannot hand off to it.',
   },
 ]
