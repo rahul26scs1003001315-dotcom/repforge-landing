@@ -12,6 +12,11 @@ const APK_DOWNLOAD_URL =
   // links, and it is where a click becomes a counted download.
   '/download'
 
+// Read from the app repo by next.config.js on every build (see lib/appFacts.cjs),
+// so a movement added or retired in the app cannot leave this card stale.
+const EXERCISE_COUNT = process.env.NEXT_PUBLIC_EXERCISE_COUNT ?? ''
+const ANDROID_MIN_VERSION = process.env.NEXT_PUBLIC_ANDROID_MIN_VERSION ?? ''
+
 /* -------------------------------------------------------------------------- */
 /* Muscle map data                                                            */
 /* -------------------------------------------------------------------------- */
@@ -443,14 +448,13 @@ function Hero() {
             — Google Play, the direct APK and the vivo App Store.
           </p>
 
-          {/* 736 = the app's whole library: 160 hand-written EXERCISES + 574 RepDB
-              records not already covered by them + 2 cloud-only rows. The source
-              of truth is src/data/repdb.ts in the app repo, not this number. */}
+          {/* Both figures come from the app repo at build time — the library it
+              ships and its minSdkVersion — so nothing here can go stale. */}
           <dl className="mt-10 grid max-w-md grid-cols-3 gap-3">
             {[
-              { k: '736', v: 'Exercises' },
+              { k: EXERCISE_COUNT, v: 'Exercises' },
               { k: '0', v: 'Ads' },
-              { k: '7.0+', v: 'Android' },
+              { k: `${ANDROID_MIN_VERSION}+`, v: 'Android' },
             ].map((stat) => (
               <div
                 key={stat.v}

@@ -17,15 +17,19 @@ export const metadata: Metadata = {
  * These describe the APK at `releases/latest`, not `app.json`: the direct
  * download is a GitHub release asset, so it only moves when a release is cut,
  * and a page that quoted the app's version instead would advertise a checksum
- * for a file nobody can download. `npm run apk:sync` rewrites them from the
- * release APK itself (version from the build report, size and sha256 from the
- * bytes), which is the only way they should change.
+ * for a file nobody can download.
+ *
+ * Nothing here is typed. `next.config.js` reads the app repo's release record on
+ * every build — the one `publish-apk.mjs` writes from the exact file it uploaded —
+ * so a new release updates this page by being published, not by being remembered.
  */
 const APK_URL =
   'https://github.com/rahul26scs1003001315-dotcom/repforge-releases/releases/latest/download/repforge.apk'
-const APK_VERSION = '1.0.39'
-const APK_BYTES = 68406117
-const APK_SHA256 = 'd6fbcdb81b748af06dfb40a8e741e2eb47874c4e213eed18237180245566989f'
+const APK_VERSION = process.env.NEXT_PUBLIC_APK_VERSION ?? ''
+const APK_BYTES = Number(process.env.NEXT_PUBLIC_APK_BYTES ?? 0)
+const APK_SHA256 = process.env.NEXT_PUBLIC_APK_SHA256 ?? ''
+// Read from the app repo at build time; see lib/appFacts.cjs.
+const ANDROID_MIN_VERSION = process.env.NEXT_PUBLIC_ANDROID_MIN_VERSION ?? ''
 
 const SIZE_MB = `${(APK_BYTES / 1048576).toFixed(1)} MB`
 
@@ -110,7 +114,7 @@ export default function DownloadPage() {
           </DownloadLink>
 
           <p className="mt-4 text-sm leading-relaxed text-slate-400">
-            Requires Android 7.0 or newer. The download is a plain {SIZE_MB} file served from the
+            Requires Android {ANDROID_MIN_VERSION} or newer. The download is a plain {SIZE_MB} file served from the
             release page on GitHub.
           </p>
 

@@ -4,6 +4,9 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 import { playStoreUrl } from '../../lib/links'
 
+// Read from the app repo at build time; see lib/appFacts.cjs.
+const ANDROID_MIN_VERSION = process.env.NEXT_PUBLIC_ANDROID_MIN_VERSION ?? ''
+
 /* ===========================================================================
  * CONFIG — paste your store links here.
  * ---------------------------------------------------------------------------
@@ -315,7 +318,7 @@ function Hero() {
           </div>
 
           <p className="mt-3 text-xs text-muted">
-            Android 7.0+ &middot; No account required to start
+            Android {ANDROID_MIN_VERSION}+ &middot; No account required to start
           </p>
 
           <StoreBadges className="mt-8" />
@@ -1138,7 +1141,7 @@ function FinalCta() {
             </span>
           </a>
           <p className="text-xs text-muted">
-            Latest build, always at this link &middot; Android 7.0+
+            Latest build, always at this link &middot; Android {ANDROID_MIN_VERSION}+
           </p>
         </div>
 
