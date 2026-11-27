@@ -443,12 +443,11 @@ function Hero() {
             — Google Play, the direct APK and the vivo App Store.
           </p>
 
+          {/* 736 = the app's whole library: 160 hand-written EXERCISES + 574 RepDB
+              records not already covered by them + 2 cloud-only rows. The source
+              of truth is src/data/repdb.ts in the app repo, not this number. */}
           <dl className="mt-10 grid max-w-md grid-cols-3 gap-3">
             {[
-              {/* 736 = the app's whole library: 160 hand-written EXERCISES + 574
-                  RepDB records not already covered by them + 2 cloud-only rows.
-                  Source of truth is src/data/repdb.ts in the app repo, not this
-                  number; recount there before changing it. */}
               { k: '736', v: 'Exercises' },
               { k: '0', v: 'Ads' },
               { k: '7.0+', v: 'Android' },
