@@ -72,7 +72,7 @@ export default function DownloadPage() {
         </h1>
         <p className="mt-4 max-w-xl text-base leading-relaxed text-slate-300">
           Free, no account needed to start, and it runs offline once the install is done. Pick a
-          route below — the APK is the same build that goes to the stores.
+          route below — the APK is the same release that goes to the stores.
         </p>
 
         {/* Primary: the signed APK */}
