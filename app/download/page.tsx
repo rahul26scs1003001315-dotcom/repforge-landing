@@ -10,12 +10,21 @@ export const metadata: Metadata = {
   alternates: { canonical: 'https://repforge.website/download' },
 }
 
-/** The permanent release URL. Bump the three constants below when 1.0.16 ships. */
+/**
+ * The permanent release URL, and the three facts about the file it serves.
+ *
+ * These describe the APK at `releases/latest`, not `app.json`: the direct
+ * download is a GitHub release asset, so it only moves when a release is cut,
+ * and a page that quoted the app's version instead would advertise a checksum
+ * for a file nobody can download. `npm run apk:sync` rewrites them from the
+ * release APK itself (version from the build report, size and sha256 from the
+ * bytes), which is the only way they should change.
+ */
 const APK_URL =
   'https://github.com/rahul26scs1003001315-dotcom/repforge-releases/releases/latest/download/repforge.apk'
-const APK_VERSION = '1.0.27'
-const APK_BYTES = 52731883
-const APK_SHA256 = 'd2f55f0f9a148a50e2700e7b59359361c7985d1f18654bbdaab439df44f28e75'
+const APK_VERSION = '1.0.38'
+const APK_BYTES = 64926731
+const APK_SHA256 = '8b79f4793e2d3bfba07d448ecfb74aa8e0584417a06d1cb7b89f92c3fd16d04b'
 
 const SIZE_MB = `${(APK_BYTES / 1048576).toFixed(1)} MB`
 
