@@ -445,7 +445,11 @@ function Hero() {
 
           <dl className="mt-10 grid max-w-md grid-cols-3 gap-3">
             {[
-              { k: '162', v: 'Exercises' },
+              {/* 736 = the app's whole library: 160 hand-written EXERCISES + 574
+                  RepDB records not already covered by them + 2 cloud-only rows.
+                  Source of truth is src/data/repdb.ts in the app repo, not this
+                  number; recount there before changing it. */}
+              { k: '736', v: 'Exercises' },
               { k: '0', v: 'Ads' },
               { k: '7.0+', v: 'Android' },
             ].map((stat) => (
