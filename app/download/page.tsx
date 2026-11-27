@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
 import DownloadLink from '../../components/DownloadLink'
+import StoreIntentLink from '../../components/StoreIntentLink'
 import { playStoreUrl } from '../../lib/links'
 
 export const metadata: Metadata = {
@@ -44,7 +45,15 @@ const SIZE_MB = `${(APK_BYTES / 1048576).toFixed(1)} MB`
  * so every link it could carry would be a name search that may land on another
  * developer's app.
  */
-const STORES = [
+type Store = {
+  name: string
+  note: string
+  href?: string
+  /** An Android intent instead of a URL: nothing on the desktop can open it. */
+  intent?: string
+}
+
+const STORES: Store[] = [
   {
     name: 'Google Play',
     href: playStoreUrl('download'),
@@ -57,8 +66,8 @@ const STORES = [
     // intent is the only link that reaches the live listing: on a vivo phone it
     // opens that store at com.repforge, elsewhere the default market app handles it.
     name: 'Vivo App Store',
-    href: 'market://details?id=com.repforge',
-    note: 'Live on vivo phones as RepForge. This opens the store app itself, so it does nothing in a desktop browser.',
+    intent: 'market://details?id=com.repforge',
+    note: 'Live on vivo phones as RepForge. Tap this on the phone to open the store app; browsers on a computer cannot hand off to it.',
   },
 ]
 
@@ -153,19 +162,28 @@ export default function DownloadPage() {
         <section className="mt-8">
           <h2 className="text-lg font-bold text-white">Or install from a store</h2>
           <div className="mt-4 grid gap-3 sm:grid-cols-2">
-            {STORES.map((store) => (
-              <a
-                key={store.name}
-                href={store.href}
-                className="rounded-2xl border border-white/[0.10] bg-white/[0.03] p-5 transition-colors duration-200 hover:border-white/25 hover:bg-white/[0.06]"
-              >
-                <div className="text-sm font-bold text-white">{store.name}</div>
-                <p className="mt-2 text-xs leading-relaxed text-slate-400">{store.note}</p>
-                <span className="mt-3 inline-block text-xs font-semibold text-rose-400">
-                  Find RepForge &rarr;
-                </span>
-              </a>
-            ))}
+            {STORES.map((store) =>
+              store.intent ? (
+                <StoreIntentLink
+                  key={store.name}
+                  name={store.name}
+                  note={store.note}
+                  intent={store.intent}
+                />
+              ) : (
+                <a
+                  key={store.name}
+                  href={store.href}
+                  className="rounded-2xl border border-white/[0.10] bg-white/[0.03] p-5 transition-colors duration-200 hover:border-white/25 hover:bg-white/[0.06]"
+                >
+                  <div className="text-sm font-bold text-white">{store.name}</div>
+                  <p className="mt-2 text-xs leading-relaxed text-slate-400">{store.note}</p>
+                  <span className="mt-3 inline-block text-xs font-semibold text-rose-400">
+                    Find RepForge &rarr;
+                  </span>
+                </a>
+              )
+            )}
           </div>
         </section>
 
