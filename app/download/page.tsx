@@ -4,9 +4,9 @@ import DownloadLink from '../../components/DownloadLink'
 import { playStoreUrl } from '../../lib/links'
 
 export const metadata: Metadata = {
-  title: 'Download RepForge — Google Play, Android APK, AppGallery and Vivo App Store',
+  title: 'Download RepForge — Google Play, Android APK and Vivo App Store',
   description:
-    'Every way to install RepForge on Android: Google Play, the signed APK with its checksum, Huawei AppGallery and the Vivo App Store.',
+    'Every way to install RepForge on Android: Google Play, the signed APK with its checksum, and the Vivo App Store.',
   alternates: { canonical: 'https://repforge.website/download' },
 }
 
@@ -34,20 +34,21 @@ const SIZE_MB = `${(APK_BYTES / 1048576).toFixed(1)} MB`
  * Google Play is the exception to "search always resolves": another developer
  * publishes "RepForge: Gym Workout Tracker" as `com.srujan1527.repforge`, so a
  * name search there lands on the wrong app. The package id is the only URL that
- * cannot be confused. The other two stores have no such clash, and their listing
- * ids live in the consoles rather than this repository, so search is still the
- * honest link for them.
+ * cannot be confused.
+ *
+ * vivo is addressed by package id as well, through the market intent: vivo's own
+ * developer documentation ("应用评论调起能力接入指南") gives `market://details?id=<pkg>`
+ * as the way to open a listing, and the global store has no web catalogue to link
+ * to instead. Huawei AppGallery is deliberately absent: it has no public
+ * package-name lookup and this repository never recorded the store's own app id,
+ * so every link it could carry would be a name search that may land on another
+ * developer's app.
  */
 const STORES = [
   {
     name: 'Google Play',
     href: playStoreUrl('download'),
     note: 'The store install: managed updates, no sideloading, and the listing has to pass Play review before a build arrives.',
-  },
-  {
-    name: 'Huawei AppGallery',
-    href: 'https://appgallery.huawei.com/search/RepForge',
-    note: 'Listed as RepForge. A store copy is always behind the APK above while a release is in review — the direct download is the current build.',
   },
   {
     // vivo's developer console exposes no web listing and the global store has no

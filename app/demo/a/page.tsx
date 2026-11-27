@@ -440,7 +440,7 @@ function Hero() {
             >
               All download options
             </a>{' '}
-            — Google Play, direct APK, AppGallery and the vivo App Store.
+            — Google Play, the direct APK and the vivo App Store.
           </p>
 
           <dl className="mt-10 grid max-w-md grid-cols-3 gap-3">
